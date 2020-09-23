@@ -10,6 +10,7 @@ django = "*"
 pytest = "*"
 isort = "*"
 flake8 = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"
