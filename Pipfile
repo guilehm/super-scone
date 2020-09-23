@@ -17,6 +17,8 @@ gunicorn = "*"
 static3 = "*"
 django-storages = "*"
 dj-static = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"
