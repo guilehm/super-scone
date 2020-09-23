@@ -13,6 +13,10 @@ flake8 = "*"
 pillow = "*"
 whitenoise = "*"
 boto3 = "*"
+gunicorn = "*"
+static3 = "*"
+django-storages = "*"
+dj-static = "*"
 
 [requires]
 python_version = "3.8"
