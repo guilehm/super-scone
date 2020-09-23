@@ -11,6 +11,8 @@ pytest = "*"
 isort = "*"
 flake8 = "*"
 pillow = "*"
+whitenoise = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.8"
