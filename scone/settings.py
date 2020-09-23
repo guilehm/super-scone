@@ -140,7 +140,7 @@ AWS_DEFAULT_ACL = os.getenv('AWS_DEFAULT_ACL', 'public-read')
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'web/static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 MEDIA_URL = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
