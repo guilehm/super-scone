@@ -14,7 +14,7 @@ class PictureAdmin(admin.ModelAdmin):
 
 @admin.register(Crop)
 class CropAdmin(admin.ModelAdmin):
-    list_display = ('image',)
+    list_display = ('id', 'image', 'original_picture')
     list_filter = ('date_added', 'date_changed')
     search_fields = ('image__original_filename',)
     raw_id_fields = ('original_picture',)
