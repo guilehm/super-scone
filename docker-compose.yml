@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   postgres:
-    image: postgres:12.0-alpine
+    image: postgres:11.0-alpine
     container_name: scone_postgres
     environment:
       - POSTGRES_USER=postgres
