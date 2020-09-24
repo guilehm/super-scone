@@ -19,6 +19,7 @@ django-storages = "*"
 dj-static = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.8"
