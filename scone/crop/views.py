@@ -2,6 +2,7 @@ from io import BytesIO
 
 import httpx
 from asgiref.sync import sync_to_async
+from django.conf import settings
 from django.core.files import File
 from django.http import HttpResponse, HttpResponseBadRequest
 
@@ -12,6 +13,34 @@ ACCEPTED_IMAGE_CONTENT_TYPES = (
     'image/jpeg',
     'image/png',
 )
+
+WIDTH_LIMIT = 3840
+HEIGHT_LIMIT = 2160
+
+
+async def get_crop(request, width, height, fit, url):
+    if int(width) > WIDTH_LIMIT or int(height) > HEIGHT_LIMIT:
+        return HttpResponseBadRequest()
+
+    endpoint = f'{settings.CROP_API_ENDPOINT}/crop/'
+    payload = dict(
+        url=url,
+        width=width,
+        height=height,
+        fit=fit,
+    )
+
+    async with httpx.AsyncClient(timeout=30) as client:
+        response = await client.post(endpoint, data=payload)
+        try:
+            response.raise_for_status()
+        except (httpx.RequestError, httpx.HTTPStatusError):
+            return HttpResponseBadRequest()
+        image_io = BytesIO()
+        async for chunk in response.aiter_bytes():
+            image_io.write(chunk)
+        image_io.seek(0)
+    return HttpResponse(image_io.read(), status=response.status_code, content_type='image/png')
 
 
 async def simple_crop(request, width, height, url):
