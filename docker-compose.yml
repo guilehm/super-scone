@@ -3,7 +3,7 @@ version: '3.4'
 services:
   postgres:
     image: postgres:11.0-alpine
-    container_name: scone_postgres
+    container_name: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -15,13 +15,13 @@ services:
 
   redis:
     image: redis:3.2
-    container_name: scone_redis
+    container_name: redis
     ports:
       - 6379:6379
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: scone_rabbitmq
+    container_name: rabbitmq
     volumes:
       - rabbitmq_etc:/etc/rabbitmq/
       - rabbitmq_data:/var/lib/rabbitmq/
