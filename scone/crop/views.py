@@ -23,7 +23,7 @@ async def get_crop(request, width, height, fit, url):
         return HttpResponseBadRequest()
 
     endpoint = f'{settings.CROP_API_ENDPOINT}/crop/'
-    payload = dict(
+    params = dict(
         url=url,
         width=width,
         height=height,
@@ -31,7 +31,7 @@ async def get_crop(request, width, height, fit, url):
     )
 
     async with httpx.AsyncClient(timeout=30) as client:
-        response = await client.post(endpoint, data=payload)
+        response = await client.get(endpoint, params=params)
         try:
             response.raise_for_status()
         except (httpx.RequestError, httpx.HTTPStatusError):
