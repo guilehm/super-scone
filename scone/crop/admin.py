@@ -5,17 +5,18 @@ from scone.crop.models import Crop, Picture
 
 @admin.register(Picture)
 class PictureAdmin(admin.ModelAdmin):
-    list_display = ('original_filename', 'image')
+    list_display = ('uri', 'request_count')
     list_filter = ('date_added', 'date_changed')
-    search_fields = ('original_filename', 'uri')
-    readonly_fields = ('original_filename', 'extension')
+    search_fields = ('uri',)
+    readonly_fields = ('request_count',)
     date_hierarchy = 'date_added'
 
 
 @admin.register(Crop)
 class CropAdmin(admin.ModelAdmin):
-    list_display = ('id', 'image', 'original_picture')
+    list_display = ('id', 'original_picture', 'request_count')
     list_filter = ('date_added', 'date_changed')
-    search_fields = ('image__original_filename',)
+    search_fields = ('original_picture__uri',)
     raw_id_fields = ('original_picture',)
+    readonly_fields = ('request_count',)
     date_hierarchy = 'date_added'
