@@ -20,6 +20,7 @@ dj-static = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 httpx = "*"
+uvicorn = "*"
 
 [requires]
 python_version = "3.8"
