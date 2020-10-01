@@ -1,3 +1,4 @@
+import asyncio
 from io import BytesIO
 
 import httpx
@@ -62,8 +63,6 @@ async def get_crop(request, width, height, fit, url):
         image_io.seek(0)
 
     picture = await _get_or_create_picture()
-    await _increment_request_count(picture)
-    crop = await _get_or_create_crop(picture)
+    crop, *_ = await asyncio.gather(_get_or_create_crop(picture), _increment_request_count(picture))
     await _increment_request_count(crop)
-
     return HttpResponse(image_io.read(), content_type='image/png')
