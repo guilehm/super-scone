@@ -34,16 +34,17 @@ async def get_smartcrop(request, width, height, url):
         image_io.seek(0)
     sm = smartcrop.SmartCrop()
     image = Image.open(image_io)
+    _width, _height = int(width), int(height)
     result = sm.crop(
         image=image,
         width=100,
-        height=int(int(height) / int(width) * 100),
+        height=int(_height / _width * 100),
         prescale=True,
     )['top_crop']
 
     x, y = result['x'], result['y']
     w, h = result['width'], result['height']
-    crop = image.crop((x, y, x + w, y + h)).resize((int(width), int(height)))
+    crop = image.crop((x, y, x + w, y + h)).resize((_width, _height))
     crop_io = BytesIO()
     crop.save(crop_io, format='png')
     crop_io.seek(0)
